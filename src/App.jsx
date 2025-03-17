@@ -1,42 +1,22 @@
-import logo from "./assets/logo-tuhoc.png";
-import {data} from "../data";
-
-function Header() {
-  return (
-    <>
-      <header>
-        <img src={logo} alt="Tự Học" />
-        <h1>React Tuhoc.cc</h1>
-        <p>
-          Học React - Khám phá cách xây dựng ứng dụng linh hoạt, hiện đại, và
-          đầy sáng tạo!
-        </p>
-      </header>
-    </>
-  );
-}
-
-const MainContent = (props) => {
-  return (
-    <li>
-      <img src={props.image} alt={props.title} />
-      <h3>{props.title}</h3>
-      <p>{props.desc}</p>
-    </li>
-  );
-};
-// Sử dụng detructring để rút gọn code
-const MainContent1 = ({image, title, desc}) => {
-  return (
-    <li>
-      <img src={image} alt={title} />
-      <h3>{title}</h3>
-      <p>{desc}</p>
-    </li>
-  );
-};
+import {data, EXAMPLES} from "../data";
+import Header from "./components/Header/Header";
+import {MainContent1, MainContent} from "./components/MainContent/MainContent";
+import { TapButton } from "./components/TapButton";
+import { useState } from "react";
+import TapContent from "./components/TapContent";
 
 function App() {
+  const [selectedTopic, setSelectedToppic]= useState();
+  
+  // let tabContent = 'lorem ipsum dolor sit amet';
+
+  const handleSelect = (name) => {
+    // alert(`You clicked on ${name}`);
+    // tabContent = `This is ${name} tab`;
+    // console.log(`tab`+tabContent);
+    setSelectedToppic(name);
+  };
+  
   return (
     <>
       <Header />
@@ -44,15 +24,28 @@ function App() {
         <section id="core-concepts">
           <h2>Khái niệm chính trong React</h2>
           <ul>
-            {data.map((item) => (
+            {data.map((item, index) => (
               <MainContent1
                 // image={item.image}
                 // title={item.title}
                 // desc={item.desc}
+                key={index}
                 {...item}
               />
             ))}
           </ul>
+        </section>
+        <section id ="examples">
+          <h2>Example</h2>
+          <menu>
+
+            <TapButton onSelect={()=>{handleSelect('components')}} >Component</TapButton>
+            <TapButton onSelect={()=>{handleSelect('jsx')}} >JSX</TapButton>
+            <TapButton onSelect={()=>{handleSelect('props')}} >Props</TapButton>
+            <TapButton onSelect={()=>{handleSelect('state')}} >State</TapButton>
+          </menu>
+          {!selectedTopic ? <p>Chọn một tab để xem nội dung</p> : (<TapContent selectedTopic={selectedTopic} />)
+          }
         </section>
       </main>
     </>
