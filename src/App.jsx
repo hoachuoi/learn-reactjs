@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import logo from "./assets/logo-tuhoc.png";
+import {data} from "../data";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function Header() {
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <header>
+        <img src={logo} alt="Tự Học" />
+        <h1>React Tuhoc.cc</h1>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          Học React - Khám phá cách xây dựng ứng dụng linh hoạt, hiện đại, và
+          đầy sáng tạo!
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      </header>
     </>
-  )
+  );
 }
 
-export default App
+const MainContent = (props) => {
+  return (
+    <li>
+      <img src={props.image} alt={props.title} />
+      <h3>{props.title}</h3>
+      <p>{props.desc}</p>
+    </li>
+  );
+};
+// Sử dụng detructring để rút gọn code
+const MainContent1 = ({image, title, desc}) => {
+  return (
+    <li>
+      <img src={image} alt={title} />
+      <h3>{title}</h3>
+      <p>{desc}</p>
+    </li>
+  );
+};
+
+function App() {
+  return (
+    <>
+      <Header />
+      <main>
+        <section id="core-concepts">
+          <h2>Khái niệm chính trong React</h2>
+          <ul>
+            {data.map((item) => (
+              <MainContent1
+                // image={item.image}
+                // title={item.title}
+                // desc={item.desc}
+                {...item}
+              />
+            ))}
+          </ul>
+        </section>
+      </main>
+    </>
+  );
+}
+
+export default App;
