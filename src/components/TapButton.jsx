@@ -1,4 +1,4 @@
-export const TapButton = ({children, onSelect}) => {
+export const TapButton = ({children, onSelect, isSelected}) => {
 
 //     const handleClick = () => {
 //       alert(`You clicked on ${children}`);
@@ -7,7 +7,7 @@ export const TapButton = ({children, onSelect}) => {
 //   bai 14.6
     return (
     <li>
-        <button onClick={onSelect} >{children}</button>
+        <button className={isSelected ? "active" : undefined} onClick={onSelect} >{children}</button>
     </li>
     );
 }

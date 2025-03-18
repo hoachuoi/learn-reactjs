@@ -38,11 +38,10 @@ function App() {
         <section id ="examples">
           <h2>Example</h2>
           <menu>
-
-            <TapButton onSelect={()=>{handleSelect('components')}} >Component</TapButton>
-            <TapButton onSelect={()=>{handleSelect('jsx')}} >JSX</TapButton>
-            <TapButton onSelect={()=>{handleSelect('props')}} >Props</TapButton>
-            <TapButton onSelect={()=>{handleSelect('state')}} >State</TapButton>
+            <TapButton isSelected={selectedTopic == 'components'} onSelect={()=>{handleSelect('components')}} >Component</TapButton>
+            <TapButton isSelected={selectedTopic == 'jsx'} onSelect={()=>{handleSelect('jsx')}} >JSX</TapButton>
+            <TapButton isSelected={selectedTopic == 'props'} onSelect={()=>{handleSelect('props')}} >Props</TapButton>
+            <TapButton isSelected={selectedTopic == 'state'} onSelect={()=>{handleSelect('state')}} >State</TapButton>
           </menu>
           {!selectedTopic ? <p>Chọn một tab để xem nội dung</p> : (<TapContent selectedTopic={selectedTopic} />)
           }
